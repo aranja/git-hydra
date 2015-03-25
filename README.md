@@ -6,9 +6,10 @@ branch, conditionally creating the branch and optionally making a PR as well.
 This makes it pretty easy to rapidly develop multiple independent features
 and split them up into branches and pull-requests.
 
+> !IMPORTANT!
+>
 > This hook is currently unstable and highly experimental. There are
-> various untested edge cases and some circumstance might make you lost
-> and confused in your repo.
+> various untested edge cases which might make you lost and confused.
 >
 > It does not (knowingly) run hard resets or other commands where you
 > can permanently lose data. But none-the-less, please do not use this
@@ -19,7 +20,7 @@ and split them up into branches and pull-requests.
 # Motivation
 
 The idea is to increase throughput on projects with PRs and code-reviews.
-Especially where PRs need to be small, focused and self-contained, and
+Especially where PRs should be small, focused and self-contained, and
 reviews might take a day or more.
 
 In high throughput development, you may be working on separate fixes and
@@ -60,20 +61,20 @@ can update later.
 ## Manual install
 
 Just move the [post-commit.sh](https://github.com/aranja/git-hydra/master/post-commit.sh) into the
-`.git/hooks` folder of a repository.
+`.git/hooks` folder of a repository and rename it to `post-commit`.
 
 # Usage
 
 While committing as usual, append your commit message with a line
-containing only "Branch: <name>".
+containing only "Branch: \<name>".
 
 If all works like it should, you won't notice a difference in your
-working tree, but the new commit has been committed to the specified
-branch as well. If it didn't exist already, it does now, created from
-master.
+working tree, but the new commit has been cherrypicked to the specified
+branch as well. The branch will be created of master if it doesn't exist
+already.
 
-If you end the message with "Push: <name>" instead, the target branch will
-additionally be pushed to the remote and if you do "PR: <name>", a pull-request
+If you end the message with "Push: \<name>" instead, the target branch will
+additionally be pushed to the remote and if you do "PR: \<name>", a pull-request
 will be created on github.
 
 # Tips
@@ -87,20 +88,21 @@ pull-requests. The github client provides an excellent UI for selecting
 hunks and lines to commit. As long as they changes are fairly independent
 everything should be beautiful.
 
-When master has been updated enough, you can start again by recreating the
-local branch from master, and merge all active pull-requests again.
+When changes have been merged into master, you can start again by recreating
+the local branch from master and re-merge active pull-requests.
 
 # Notes
 
 *   The matcher is case insensitive and the colon is optional. E.g. you can
-    end your commit message with "branch <name>".
+    end your commit message with "branch \<name>".
 
 *   If the commit conflicts with master or the target branch, you'll end
-    up in the target branch where you have to resolve the merge conflict.
+    up in the target branch where you have to resolve the merge conflict
+    and commit again.
 
     After doing so, you can go back to the branch you came from. If you
     are missing changes from your working tree, run `git stash pop` and
-    they should be back
+    you'll get them back.
 
 *   If you forget to annotate where a commit should go, you can amend it's
     commit message and it will go where it should. It's also possible to
