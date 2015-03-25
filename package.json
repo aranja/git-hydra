@@ -1,7 +1,7 @@
 {
   "name": "git-hydra",
   "description": "Installs a post-commit hook which helps split your work into multiple branches and PRs.",
-  "version": "0.8.0",
+  "version": "0.8.0-alpha1",
   "repository": "aranja/git-hydra",
   "author": "Aranja <hello@aranja.com>",
   "tags": [
