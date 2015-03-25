@@ -1,0 +1,31 @@
+{
+  "name": "git-hydra",
+  "description": "Installs a post-commit hook which helps split your work into multiple branches and PRs.",
+  "version": "0.8.0",
+  "repository": "aranja/git-hydra",
+  "author": "Aranja <hello@aranja.com>",
+  "tags": [
+    "git",
+    "post-commit",
+    "pr",
+    "github",
+    "branch"
+  ],
+  "files": [
+    "bin",
+    "post-commit"
+  ],
+  "bin": {
+    "git-hydra": "./bin/git-hydra.js"
+  },
+  "dependencies": {
+    "yargs": "^3.6.0"
+  },
+  "scripts": {},
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/aranja/git-hydra/master/LICENSE"
+    }
+  ]
+}
